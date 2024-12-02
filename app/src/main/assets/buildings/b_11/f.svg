@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="ways" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.73 393.14">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #1d1d1b;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  
+  <g id="ways">
+    <line class="cls-1" x1="26.59" y1="5.98" x2="26.59" y2="50.25"/>
+    <line class="cls-1" x1="26.59" y1="50.25" x2="73.32" y2="91.39"/>
+    <line class="cls-1" x1="80.13" y1="248.51" x2="127.88" y2="233.16"/>
+    <line class="cls-1" x1="117.59" y1="300.69" x2="190.34" y2="208.41"/>
+    <line class="cls-1" x1="80.13" y1="166.73" x2="190.34" y2="208.41"/>
+    <line class="cls-1" x1="73.32" y1="91.39" x2="49.95" y2="136.56"/>
+    <line class="cls-1" x1="29.94" y1="277.43" x2="117.59" y2="300.69"/>
+    <line class="cls-1" x1="80.13" y1="248.51" x2="29.94" y2="277.43"/>
+    <line class="cls-1" x1="73.32" y1="91.39" x2="80.13" y2="166.73"/>
+    <line class="cls-1" x1="80.13" y1="166.73" x2="80.13" y2="248.51"/>
+    <line class="cls-1" x1="117.59" y1="300.69" x2="153.97" y2="386.55"/>
+    <line class="cls-1" x1="26.59" y1="50.25" x2=".43" y2="93.18"/>
+    <circle id="_A" class="cls-1" cx="26.59" cy="5.98" r="5.48"/>
+    <circle id="_B" class="cls-1" cx="153.97" cy="386.55" r="6.09"/>
+  </g>
+</svg>

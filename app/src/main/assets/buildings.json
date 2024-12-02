@@ -1,0 +1,22 @@
+{
+  "buildings": [
+    {
+      "id": 11,
+      "name": "Главное здание",
+      "abbr": "ГЗ",
+      "address": "",
+      "x": 100,
+      "y": 400,
+      "width": 1000,
+      "height": 1000,
+      "floors": [
+        {
+          "number": 1
+        },
+        {
+          "number": 2
+        }
+      ]
+    }
+  ]
+}
