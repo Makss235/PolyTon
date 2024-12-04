@@ -1,8 +1,7 @@
-package com.polyton.data
+package com.polyton.ui.map
 
 import android.graphics.Canvas
 import android.view.SurfaceHolder
-import com.polyton.ui.map.MapView
 
 class MapThread(
     private val surfaceHolder: SurfaceHolder,

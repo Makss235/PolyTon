@@ -3,6 +3,7 @@ package com.polyton.ui
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.polyton.data.BuildingItems
 import com.polyton.data.DataFromParsers
 import com.polyton.data.parsers.ParserJson
@@ -19,6 +20,21 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
-        setContentView(MapView(applicationContext))
+
+        val mapDrawLayoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        mapDrawLayoutParams.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID
+        mapDrawLayoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+        mapDrawLayoutParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID
+        mapDrawLayoutParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+
+        val mapDraw = MapView(applicationContext)
+        mapDraw.layoutParams = mapDrawLayoutParams
+
+        val constraintLayout = ConstraintLayout(applicationContext)
+        constraintLayout.addView(mapDraw)
+
+        setContentView(constraintLayout)
     }
 }

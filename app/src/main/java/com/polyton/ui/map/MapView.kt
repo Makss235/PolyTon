@@ -1,73 +1,91 @@
 package com.polyton.ui.map
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.PorterDuff
 import android.util.AttributeSet
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.Scroller
-import com.caverock.androidsvg.SVG
-import com.polyton.data.MapThread
+import com.polyton.data.DataFromParsers
 
 class MapView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : SurfaceView(context, attrs), SurfaceHolder.Callback {
-
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var thread: MapThread? = null
 
-    private var svg: SVG
-    private var rectF: RectF
+    private val buildingDraws: ArrayList<BuildingDraw> = ArrayList<BuildingDraw>()
+    private lateinit var currentBuilding : BuildingDraw
 
     private var scaleFactor = 1f
-    private val matrix = Matrix()
 
     private val scaleDetector = ScaleGestureDetector(context, ScaleListener())
     private val gestureDetector = GestureDetector(context, GestureListener())
     private val scroller: Scroller = Scroller(context)
 
+    private lateinit var tempBitmap : Bitmap
+    private lateinit var tempCanvas : Canvas
+    private val transformationMatrix = Matrix()
+    private val scaleMatrix = Matrix()
+
+    private val paint : Paint = Paint()
+
+    private var x = 0f
+    private var y = 0f
+
     init {
         holder.addCallback(this)
         isFocusable = true
 
-        svg = SVG.getFromAsset(context.assets,
-            "buildings/b_11/f_1.svg")
-        rectF = RectF(100f, 100f,
-            1000f, 1000f)
+        for (bData in DataFromParsers.getBuildings()) {
+            val buildingDraw = BuildingDraw(context)
+            buildingDraw.initBuilding(bData)
+            buildingDraws.add(buildingDraw)
+        }
 
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 3f
-        paint.color = Color.RED
+        paint.style = Paint.Style.FILL
+        paint.color = Color.GREEN
     }
 
     fun myDraw(canvas: Canvas) {
         canvas.save()
-//        canvas.concat(matrix)
+        canvas.drawColor(Color.WHITE)
 
-        canvas.drawRGB(255, 255, 255)
-        canvas.drawCircle(100f, 100f, 20f, paint)
-        svg.renderToCanvas(canvas, rectF)
+        tempCanvas.save()
+        tempCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        tempCanvas.drawCircle(0f, 0f, 20f, paint)
+        tempCanvas.concat(transformationMatrix)
+        tempCanvas.concat(scaleMatrix)
 
+        for (b in buildingDraws)
+            b.draw(tempCanvas)
+
+        tempCanvas.restore()
+
+        canvas.drawBitmap(tempBitmap, 0f, 0f, null)
         canvas.restore()
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-//        scaleDetector.onTouchEvent(event)
+        scaleDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
-//        rectF.left = event.x
-//        Log.v("1111", "${event.x} ${event.y}")
-//        rectF.top = event.y
-//        rectF.right = event.x + 900
-//        rectF.bottom = event.y + 900
         return true
+    }
+
+    @SuppressLint("DrawAllocation")
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+        tempBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        tempCanvas = Canvas(tempBitmap)
     }
 
     override fun surfaceChanged(
@@ -94,62 +112,46 @@ class MapView @JvmOverloads constructor(
         }
     }
 
-    override fun computeScroll() {
-        if (scroller.computeScrollOffset()) {
-            val oldX = scrollX
-            val oldY = scrollY
-            val x = scroller.currX
-            val y = scroller.currY
-            scrollTo(x, y)
-
-            if (oldX != scrollX || oldY != scrollY) {
-                onScrollChanged(scrollX, scrollY, oldX, oldY)
-            }
-            invalidate()
-        }
-    }
+//    override fun computeScroll() {
+//        if (scroller.computeScrollOffset()) {
+//            val oldX = scrollX
+//            val oldY = scrollY
+//            val x = scroller.currX
+//            val y = scroller.currY
+//            scrollTo(x, y)
+//
+//            if (oldX != scrollX || oldY != scrollY) {
+//                onScrollChanged(scrollX, scrollY, oldX, oldY)
+//            }
+//            invalidate()
+//        }
+//    }
 
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(detector: ScaleGestureDetector): Boolean {
 
             scaleFactor *= detector.scaleFactor
             scaleFactor = Math.max(0.1f, Math.min(scaleFactor, 10.0f))
-            matrix.setScale(scaleFactor, scaleFactor, width / 2 + scrollX.toFloat(),
-                height / 2 + scrollY.toFloat())
+            scaleMatrix.setScale(scaleFactor, scaleFactor, width / 2f, height / 2f)
             return true
         }
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onScroll(
-            e1: MotionEvent?,
-            e2: MotionEvent,
-            distanceX: Float,
-            distanceY: Float
-        ): Boolean {
-            rectF.left -= distanceX
-            rectF.top -= distanceY
-            rectF.right -= distanceX
-            rectF.bottom -= distanceY
+        override fun onScroll(e1: MotionEvent?, e2: MotionEvent,
+            distanceX: Float, distanceY: Float): Boolean {
+            x -= distanceX
+            y -= distanceY
+            transformationMatrix.reset()
+            transformationMatrix.postTranslate(x, y)
             return true
         }
 
-//        override fun onFling(
-//            e1: MotionEvent?,
-//            e2: MotionEvent,
-//            velocityX: Float,
-//            velocityY: Float
-//        ): Boolean {
-//            scroller.fling(
-//                scrollX,
-//                scrollY,
-//                -velocityX.toInt(),
-//                -velocityY.toInt(),
-//                -10000,
-//                10000,
-//                -10000,
-//                10000
-//            )
+//        override fun onFling(e1: MotionEvent?, e2: MotionEvent,
+//            velocityX: Float, velocityY: Float): Boolean {
+//            scroller.fling(x.toInt(), y.toInt(),
+//                -velocityX.toInt(), -velocityY.toInt(),
+//                -10000, 10000, -10000, 10000)
 //
 //            return true
 //        }

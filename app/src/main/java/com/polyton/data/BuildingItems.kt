@@ -1,15 +1,15 @@
 package com.polyton.data
 
-data class BuildingData(private var id: Int,
-                   private var name: String?,
-                   private var abbr: String?,
-                   private var address: String?,
-                   private var x: Float,
-                   private var y: Float,
-                   private var width: Float,
-                   private var height: Float,
-                   private var floors: List<FloorData>?)
+data class BuildingData(var id: Int,
+                   var name: String?,
+                   var abbr: String?,
+                   var address: String?,
+                   var x: Float,
+                   var y: Float,
+                   var width: Float,
+                   var height: Float,
+                   var floors: List<FloorData>?)
 
-data class FloorData(private var number: Int)
+data class FloorData(var number: Int)
 
 data class BuildingItems(var buildings: List<BuildingData>? = null)
