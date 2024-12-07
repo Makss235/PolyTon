@@ -13,8 +13,8 @@ import kotlin.math.sqrt
 
 data class Vertex(
     var id: String = "",
-    val x: Double,
-    val y: Double,
+    var x: Double,
+    var y: Double,
     var edges: MutableList<Edge> = mutableListOf()
 ) {
     override fun equals(other: Any?): Boolean {

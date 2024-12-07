@@ -38,8 +38,24 @@ class MapView @JvmOverloads constructor(
 
     private val paint : Paint = Paint()
 
+    // Полные координаты
     private var x = 0f
     private var y = 0f
+
+    // Только трансформация
+    private var xT = 0f
+    private var yT = 0f
+
+    // Координаты при скейлинге
+    private var xScale = 0f
+    private var yScale = 0f
+
+    // Координаты при скейлинге (пред скейлинг)
+    private var xScalePrev = 0f
+    private var yScalePrev = 0f
+
+    private var xTouch = 0f
+    private var yTouch = 0f
 
     init {
         holder.addCallback(this)
@@ -71,10 +87,34 @@ class MapView @JvmOverloads constructor(
         tempCanvas.restore()
 
         canvas.drawBitmap(tempBitmap, 0f, 0f, null)
+
+        canvas.scale(3f, 3f)
+
+        canvas.drawText(xTouch.toString(), 20f, 20f, paint)
+        canvas.drawText(yTouch.toString(), 20f, 40f, paint)
+        canvas.drawText(x.toString(), 20f, 60f, paint)
+        canvas.drawText(y.toString(), 20f, 80f, paint)
+        canvas.drawText(((xTouch - x)/scaleFactor).toString(), 20f, 100f, paint)
+        canvas.drawText(((yTouch - y)/scaleFactor).toString(), 20f, 120f, paint)
+        canvas.drawText((scaleFactor).toString(), 20f, 140f, paint)
+
         canvas.restore()
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        xTouch = event.x
+        yTouch = event.y
+
+        val xxx = (xTouch - x)/scaleFactor
+        val yyy = (yTouch - y)/scaleFactor
+
+        for (b in buildingDraws) {
+            if (b.rectF.contains(xxx, yyy)) {
+                b.onTouchEvent(event, xxx, yyy)
+                break
+            }
+        }
+
         scaleDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
         return true
@@ -133,6 +173,17 @@ class MapView @JvmOverloads constructor(
             scaleFactor *= detector.scaleFactor
             scaleFactor = Math.max(0.1f, Math.min(scaleFactor, 10.0f))
             scaleMatrix.setScale(scaleFactor, scaleFactor, width / 2f, height / 2f)
+
+            val v = FloatArray(9)
+            scaleMatrix.getValues(v)
+            val xS = v[Matrix.MTRANS_X]
+            val yS = v[Matrix.MTRANS_Y]
+
+            x = x - xScalePrev + xS
+            y = y - yScalePrev + yS
+            xScalePrev = xS
+            yScalePrev = yS
+
             return true
         }
     }
@@ -142,8 +193,10 @@ class MapView @JvmOverloads constructor(
             distanceX: Float, distanceY: Float): Boolean {
             x -= distanceX
             y -= distanceY
+            xT -= distanceX
+            yT -= distanceY
             transformationMatrix.reset()
-            transformationMatrix.postTranslate(x, y)
+            transformationMatrix.postTranslate(xT, yT)
             return true
         }
 
