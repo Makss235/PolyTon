@@ -5,9 +5,9 @@ import android.view.SurfaceHolder
 
 class MapThread(
     private val surfaceHolder: SurfaceHolder,
-    surfaceView: MapView) : Thread() {
+    surfaceView: MapDraw) : Thread() {
 
-    private val mapView: MapView = surfaceView
+    private val mapDraw: MapDraw = surfaceView
     private var isRun = false
 
     fun setRunning(b: Boolean) {
@@ -21,7 +21,7 @@ class MapThread(
             try {
                 c = surfaceHolder.lockCanvas(null)
                 synchronized(surfaceHolder) {
-                    mapView.myDraw(c)
+                    mapDraw.myDraw(c)
                 }
             } finally {
                 if (c != null) {

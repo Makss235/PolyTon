@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.polyton.data.BuildingItems
 import com.polyton.data.DataFromParsers
 import com.polyton.data.parsers.ParserJson
+import com.polyton.ui.map.MapDraw
 import com.polyton.ui.map.MapView
 
 
