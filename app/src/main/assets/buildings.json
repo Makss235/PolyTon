@@ -5,10 +5,10 @@
       "name": "Главное здание",
       "abbr": "ГЗ",
       "address": "",
-      "x": 0,
-      "y": 0,
-      "width": 1000,
-      "height": 1000,
+      "x": -1500,
+      "y": 200,
+      "width": 4000,
+      "height": 4000,
       "floors": [
         {
           "number": 1

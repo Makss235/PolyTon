@@ -67,7 +67,7 @@ class FloorDraw(private val context: Context) : Drawable() {
 
         for (v in graph.vertices) {
             v.x = v.x * xRatio + bData.x
-            v.y = v.y * yRatio + bData.y + 7
+            v.y = v.y * yRatio + bData.y + 13 * yRatio
             if (v.id != "") {
                 val p = MapPoint(context, v)
                 points.add(p)
