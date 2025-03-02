@@ -1,4 +1,4 @@
-package com.polyton.ui.map
+package com.polyton.ui.map.draw
 
 import android.content.Context
 import android.graphics.Canvas
@@ -11,12 +11,13 @@ import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import com.caverock.androidsvg.SVG
-import com.polyton.data.BuildingData
+import com.polyton.data.map.BuildingData
 import com.polyton.data.DijkstraAlgorithm
-import com.polyton.data.FloorData
+import com.polyton.data.map.FloorData
 import com.polyton.data.parsers.Graph
 import com.polyton.data.parsers.Vertex
 import com.polyton.data.parsers.XMLFloorParser
+import kotlinx.event.event
 
 class FloorDraw(private val context: Context) : Drawable() {
 
@@ -38,6 +39,7 @@ class FloorDraw(private val context: Context) : Drawable() {
     private var xRatio : Double = 0.0
     private var yRatio : Double = 0.0
 
+    val pointClicked = event<PointEventArgs>()
 
     init {
         paint.style = Paint.Style.STROKE
@@ -105,23 +107,22 @@ class FloorDraw(private val context: Context) : Drawable() {
     fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
         if (event.action == MotionEvent.ACTION_UP) {
             for (p in points) {
-                val r = RectF(p.vertex.x.toFloat() - 20,
-                    p.vertex.y.toFloat() - 20,
-                    p.vertex.x.toFloat() + 20,
-                    p.vertex.y.toFloat() + 20)
-                if (r.contains(x, y)) {
+                if (p.r.contains(x, y)) {
                     p.onTouchEvent(event, x, y)
-                    if (p.isActivate)
-                        curPoints.add(p)
-                    else curPoints.remove(p)
-                    if (curPoints.size == 2) {
-                        pointsAlgo.addAll(algorithm.runAlgorithm(
-                            curPoints[0].vertex.id, curPoints[1].vertex.id))
-                    }
-                    else {
-                        pointsAlgo.clear()
-                        algorithm = DijkstraAlgorithm(graph)
-                    }
+
+                    pointClicked(PointEventArgs(p.isActivate, p, fData, bData))
+
+//                    if (p.isActivate)
+//                        curPoints.add(p)
+//                    else curPoints.remove(p)
+//                    if (curPoints.size == 2) {
+//                        pointsAlgo.addAll(algorithm.runAlgorithm(
+//                            curPoints[0].vertex.id, curPoints[1].vertex.id))
+//                    }
+//                    else {
+//                        pointsAlgo.clear()
+//                        algorithm = DijkstraAlgorithm(graph)
+//                    }
                     break
                 }
             }
@@ -138,3 +139,9 @@ class FloorDraw(private val context: Context) : Drawable() {
         return PixelFormat.OPAQUE;
     }
 }
+
+data class PointEventArgs(val isActivate: Boolean,
+                          val point: MapPoint,
+                          val floorData: FloorData,
+                          val buildingData: BuildingData
+)

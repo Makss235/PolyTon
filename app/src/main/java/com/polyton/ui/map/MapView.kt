@@ -6,13 +6,22 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.polyton.ui.map.draw.BuildingDraw
+import com.polyton.ui.map.draw.MapWidget1
+import com.polyton.ui.map.draw.MapPoint
+import com.polyton.ui.map.draw.PointEventArgs
+import com.polyton.ui.map2.MapWidget
 
 class MapView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null) :
     FrameLayout(context, attrs) {
 
     private val buttonLayerLinearLayout : LinearLayout
-    private val mapDraw : MapDraw
+    private val mapWidget : MapWidget
+
+    private lateinit var firstPoint : MapPoint
+    private lateinit var secondPoint : MapPoint
 
     init {
         val mapDrawLayoutParams = ConstraintLayout.LayoutParams(
@@ -35,14 +44,13 @@ class MapView @JvmOverloads constructor(
         buttonLayerLinearLayout.orientation = LinearLayout.VERTICAL
         buttonLayerLinearLayout.layoutParams = buttonLayerLayoutParams
 
-        mapDraw = MapDraw(context)
-        mapDraw.layoutParams = mapDrawLayoutParams
-//        mapDraw.onCurrentBuildingChanged += { (buildingDraw) ->
-//            buttonLayersReinit(buildingDraw) }
-        buttonLayersReinit(mapDraw.currentBuilding)
+        mapWidget = MapWidget(context)
+//        mapWidget.pointClicked += { pointClicked(it) }
+        mapWidget.layoutParams = mapDrawLayoutParams
+//        buttonLayersReinit(mapWidget.currentBuilding)
 
         val constraintLayout = ConstraintLayout(context)
-        constraintLayout.addView(mapDraw)
+        constraintLayout.addView(mapWidget)
         constraintLayout.addView(buttonLayerLinearLayout)
 
         addView(constraintLayout)
@@ -57,10 +65,36 @@ class MapView @JvmOverloads constructor(
             b.text = number.toString()
             b.setOnClickListener {
                 buildingDraw.currentFloor = buildingDraw.floorDraws[number - 1]
-                mapDraw.invalidate()
+                mapWidget.invalidate()
             }
 
             buttonLayerLinearLayout.addView(b)
         }
+    }
+
+    private fun pointClicked(args: PointEventArgs) {
+        val dialog = BottomSheetDialog(context)
+
+        val b1: Button = Button(context)
+        b1.text = "1"
+        b1.setOnClickListener {
+            firstPoint = args.point
+            args.point.answer(true)
+            dialog.dismiss()
+        }
+        val b2: Button = Button(context)
+        b2.text = "2"
+        b2.setOnClickListener {
+            secondPoint = args.point
+            args.point.answer(true)
+            dialog.dismiss()
+        }
+
+        val l = LinearLayout(context)
+        l.addView(b1)
+        l.addView(b2)
+
+        dialog.setContentView(l)
+        dialog.show()
     }
 }

@@ -4,10 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.polyton.data.BuildingItems
+import com.polyton.data.map.BuildingItems
 import com.polyton.data.DataFromParsers
 import com.polyton.data.parsers.ParserJson
-import com.polyton.ui.map.MapDraw
 import com.polyton.ui.map.MapView
 
 
@@ -30,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         mapDrawLayoutParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID
         mapDrawLayoutParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
 
-        val mapDraw = MapView(applicationContext)
-        mapDraw.layoutParams = mapDrawLayoutParams
+        val mapView = MapView(this)
+        mapView.layoutParams = mapDrawLayoutParams
 
-        val constraintLayout = ConstraintLayout(applicationContext)
-        constraintLayout.addView(mapDraw)
+        val constraintLayout = ConstraintLayout(this)
+        constraintLayout.addView(mapView)
 
         setContentView(constraintLayout)
     }

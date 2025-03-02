@@ -1,5 +1,7 @@
 package com.polyton.data
 
+import com.polyton.data.map.BuildingData
+
 object DataFromParsers {
 
     private var building: List<BuildingData> = ArrayList<BuildingData>()

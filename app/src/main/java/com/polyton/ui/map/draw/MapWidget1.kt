@@ -1,4 +1,4 @@
-package com.polyton.ui.map
+package com.polyton.ui.map.draw
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,14 +16,17 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.Scroller
 import com.polyton.data.DataFromParsers
+import com.polyton.ui.map.MapThread
+import kotlinx.event.event
 
-class MapDraw @JvmOverloads constructor(
+class MapWidget1 @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : SurfaceView(context, attrs), SurfaceHolder.Callback {
     private var thread: MapThread? = null
 
     private val buildingDraws: ArrayList<BuildingDraw> = ArrayList<BuildingDraw>()
-    lateinit var currentBuilding : BuildingDraw
+    var currentBuilding : BuildingDraw
+    val pointClicked = event<PointEventArgs>()
 
     private var scaleFactor = 1f
 
@@ -64,6 +67,7 @@ class MapDraw @JvmOverloads constructor(
         for (bData in DataFromParsers.getBuildings()) {
             val buildingDraw = BuildingDraw(context)
             buildingDraw.initBuilding(bData)
+            buildingDraw.pointClicked += { pointClicked(it) }
             buildingDraws.add(buildingDraw)
         }
         currentBuilding = buildingDraws[0]
@@ -136,9 +140,9 @@ class MapDraw @JvmOverloads constructor(
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        thread = MapThread(getHolder(), this)
-        thread!!.setRunning(true)
-        thread!!.start()
+//        thread = MapThread(getHolder(), this)
+//        thread!!.setRunning(true)
+//        thread!!.start()
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {

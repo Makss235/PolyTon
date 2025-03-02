@@ -1,4 +1,4 @@
-package com.polyton.ui.map
+package com.polyton.ui.map.draw
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,27 +8,31 @@ import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
-import android.text.method.Touch
 import android.view.MotionEvent
-import com.polyton.data.BuildingData
+import com.polyton.data.map.BuildingData
+import kotlinx.event.event
 
 
 class BuildingDraw(private val context: Context) : Drawable() {
     private var flag: Boolean = false
-    lateinit var bData: BuildingData
+    private lateinit var bData: BuildingData
 
     val floorDraws: ArrayList<FloorDraw> = ArrayList()
     lateinit var currentFloor: FloorDraw
     var rectF: RectF = RectF(Float.MAX_VALUE, Float.MAX_VALUE, 0f, 0f)
+    val pointClicked = event<PointEventArgs>()
 
     private val paint : Paint = Paint()
 
     fun initBuilding(buildingData: BuildingData) {
         bData = buildingData
 
+
+
         for (fData in bData.floors!!) {
             val floorDraw = FloorDraw(context)
             floorDraw.initFloor(fData, bData)
+            floorDraw.pointClicked += { pointClicked(it) }
             floorDraws.add(floorDraw)
             rectF.left = rectF.left.coerceAtMost(floorDraw.rectF.left)
             rectF.top = rectF.top.coerceAtMost(floorDraw.rectF.top)

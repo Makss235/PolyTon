@@ -2,30 +2,31 @@ package com.polyton.ui.map
 
 import android.graphics.Canvas
 import android.view.SurfaceHolder
+import com.polyton.ui.map2.MapWidget
 
 class MapThread(
     private val surfaceHolder: SurfaceHolder,
-    surfaceView: MapDraw) : Thread() {
+    surfaceView: MapWidget) : Thread() {
 
-    private val mapDraw: MapDraw = surfaceView
+    private val mapWidget: MapWidget = surfaceView
     private var isRun = false
 
-    fun setRunning(b: Boolean) {
-        isRun = b
+    fun setRunning(boolValue: Boolean) {
+        isRun = boolValue
     }
 
     override fun run() {
         // super.run();
         while (isRun) {
-            var c: Canvas? = null
+            var canvas: Canvas? = null
             try {
-                c = surfaceHolder.lockCanvas(null)
+                canvas = surfaceHolder.lockCanvas(null)
                 synchronized(surfaceHolder) {
-                    mapDraw.myDraw(c)
+                    mapWidget.getMapDrawSystem().draw(canvas)
                 }
             } finally {
-                if (c != null) {
-                    surfaceHolder.unlockCanvasAndPost(c)
+                if (canvas != null) {
+                    surfaceHolder.unlockCanvasAndPost(canvas)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.polyton.ui.map
+package com.polyton.ui.map.draw
 
 import android.content.Context
 import android.graphics.Canvas
@@ -16,10 +16,11 @@ class MapPoint(private val context: Context, var vertex : Vertex) : Drawable() {
 
     private val paint : Paint = Paint()
     private val textPaint : Paint = Paint()
-    var isActivate = false
 
-    private val r : RectF
+    val r : RectF
     private var title : String = ""
+
+    var isActivate = false
 
     init {
         paint.style = Paint.Style.FILL
@@ -53,15 +54,33 @@ class MapPoint(private val context: Context, var vertex : Vertex) : Drawable() {
     }
 
     fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
-        if (event.action == MotionEvent.ACTION_UP)
+        if (event.action == MotionEvent.ACTION_UP) {
             if (isActivate) {
-                paint.color = Color.GREEN
-                isActivate = false
+                deactivate()
             }
             else {
-                paint.color = Color.RED
-                isActivate = true
+                activate()
             }
+        }
+    }
+
+    private fun activate() {
+        paint.color = Color.YELLOW
+        isActivate = true
+    }
+
+    private fun deactivate() {
+        paint.color = Color.GREEN
+        isActivate = false
+    }
+
+    fun answer(r: Boolean) {
+        if (r) {
+            paint.color = Color.RED
+        }
+        else {
+            paint.color = Color.GREEN
+        }
     }
 
     override fun setAlpha(p0: Int) {
