@@ -13,13 +13,17 @@ class MapDrawSystem(private val mapWidget: MapWidget) : DrawSystem() {
     private lateinit var tempBitmap : Bitmap
     private lateinit var tempCanvas : Canvas
 
-    private val buildingDraws = ArrayList<BuildingDraw>()
+    private val buildingDrawSystems = ArrayList<BuildingDrawSystem>()
 
     private val paint = Paint()
 
     init {
         paint.style = Paint.Style.FILL
         paint.color = Color.GREEN
+    }
+
+    fun addBuildingDrawSystem(buildingDrawSystem: BuildingDrawSystem) {
+        buildingDrawSystems.add(buildingDrawSystem)
     }
 
     override fun draw(canvas: Canvas) {
@@ -31,11 +35,11 @@ class MapDrawSystem(private val mapWidget: MapWidget) : DrawSystem() {
         tempCanvas.concat(mapWidget.getMapGestureSystem().getTransformationMatrix())
         tempCanvas.concat(mapWidget.getMapGestureSystem().getScaleMatrix())
 
-        tempCanvas.drawCircle(200f, 200f, 20f, paint)
+//        tempCanvas.drawCircle(200f, 200f, 20f, paint)
 
-//        for (buildingDraw in buildingDraws) {
-//            buildingDraw.draw(tempCanvas)
-//        }
+        for (buildingDrawSystem in buildingDrawSystems) {
+            buildingDrawSystem.draw(tempCanvas)
+        }
 
         tempCanvas.restore()
         canvas.drawBitmap(tempBitmap, 0f, 0f, null)

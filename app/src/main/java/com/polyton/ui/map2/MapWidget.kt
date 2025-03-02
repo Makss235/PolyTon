@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.polyton.data.DataFromParsers
 import com.polyton.ui.map.MapThread
 import com.polyton.ui.map2.draw.MapDrawSystem
 
@@ -17,9 +18,16 @@ class MapWidget @JvmOverloads constructor(
     private val mapDrawSystem = MapDrawSystem(this)
     private val mapGestureSystem = MapGestureSystem(this)
 
+    private val buildings = ArrayList<Building>()
+
     init {
         holder.addCallback(this)
         isFocusable = true
+
+        for (buildingData in DataFromParsers.getBuildings()) {
+            val building = Building(context, buildingData)
+            mapDrawSystem.addBuildingDrawSystem(building.getBuildingDraw())
+        }
     }
 
     fun getMapDrawSystem() : MapDrawSystem {
