@@ -16,7 +16,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.Scroller
 import com.polyton.data.DataFromParsers
-import com.polyton.ui.map.MapThread
+import com.polyton.ui.widgets.map.MapThread
 import kotlinx.event.event
 
 class MapWidget1 @JvmOverloads constructor(

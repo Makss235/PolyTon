@@ -1,4 +1,4 @@
-package com.polyton.ui.map
+package com.polyton.ui.widgets.map
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,10 +8,8 @@ import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.polyton.ui.map.draw.BuildingDraw
-import com.polyton.ui.map.draw.MapWidget1
 import com.polyton.ui.map.draw.MapPoint
 import com.polyton.ui.map.draw.PointEventArgs
-import com.polyton.ui.map2.MapWidget
 
 class MapView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null) :

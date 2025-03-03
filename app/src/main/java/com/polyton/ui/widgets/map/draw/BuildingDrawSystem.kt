@@ -1,8 +1,8 @@
-package com.polyton.ui.map2.draw
+package com.polyton.ui.widgets.map.draw
 
 import android.graphics.Canvas
-import com.polyton.ui.map2.Building
-import com.polyton.ui.map2.draw.base.DrawSystem
+import com.polyton.ui.widgets.map.objects.Building
+import com.polyton.ui.widgets.map.draw.base.DrawSystem
 
 class BuildingDrawSystem(private val building: Building) : DrawSystem() {
 

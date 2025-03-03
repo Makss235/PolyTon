@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.polyton.data.map.BuildingItems
 import com.polyton.data.DataFromParsers
 import com.polyton.data.parsers.ParserJson
-import com.polyton.ui.map.MapView
+import com.polyton.ui.widgets.map.MapView
 
 
 class MainActivity : AppCompatActivity() {

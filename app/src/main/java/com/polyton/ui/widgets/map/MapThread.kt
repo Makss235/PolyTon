@@ -1,12 +1,12 @@
-package com.polyton.ui.map
+package com.polyton.ui.widgets.map
 
 import android.graphics.Canvas
 import android.view.SurfaceHolder
-import com.polyton.ui.map2.MapWidget
 
 class MapThread(
     private val surfaceHolder: SurfaceHolder,
-    surfaceView: MapWidget) : Thread() {
+    surfaceView: MapWidget
+) : Thread() {
 
     private val mapWidget: MapWidget = surfaceView
     private var isRun = false

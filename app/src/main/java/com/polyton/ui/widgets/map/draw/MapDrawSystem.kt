@@ -1,12 +1,12 @@
-package com.polyton.ui.map2.draw
+package com.polyton.ui.widgets.map.draw
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
-import com.polyton.ui.map2.MapWidget
-import com.polyton.ui.map2.draw.base.DrawSystem
+import com.polyton.ui.widgets.map.MapWidget
+import com.polyton.ui.widgets.map.draw.base.DrawSystem
 
 class MapDrawSystem(private val mapWidget: MapWidget) : DrawSystem() {
 

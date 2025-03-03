@@ -1,7 +1,5 @@
-package com.polyton.ui.map2
+package com.polyton.ui.widgets.map
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Matrix
 import android.view.GestureDetector
 import android.view.MotionEvent

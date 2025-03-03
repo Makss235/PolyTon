@@ -1,4 +1,4 @@
-package com.polyton.ui.map2.draw.base
+package com.polyton.ui.widgets.map.draw.base
 
 import android.graphics.Canvas
 

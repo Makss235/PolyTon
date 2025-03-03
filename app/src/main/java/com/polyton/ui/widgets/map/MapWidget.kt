@@ -1,4 +1,4 @@
-package com.polyton.ui.map2
+package com.polyton.ui.widgets.map
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,8 +7,8 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.polyton.data.DataFromParsers
-import com.polyton.ui.map.MapThread
-import com.polyton.ui.map2.draw.MapDrawSystem
+import com.polyton.ui.widgets.map.draw.MapDrawSystem
+import com.polyton.ui.widgets.map.objects.Building
 
 class MapWidget @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null) :
