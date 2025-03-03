@@ -1,7 +1,9 @@
 package com.polyton.ui.widgets.map.objects
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.RectF
+import android.view.MotionEvent
 import com.polyton.data.parsers.Vertex
 import com.polyton.ui.widgets.map.draw.PointDrawSystem
 
@@ -40,5 +42,9 @@ class Point(private val context: Context, private val vertex : Vertex) {
 
     fun getPointDrawSystem() : PointDrawSystem {
         return pointDrawSystem
+    }
+
+    fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
+        pointDrawSystem.backPaint.color = Color.RED
     }
 }

@@ -27,6 +27,7 @@ class MapWidget @JvmOverloads constructor(
         for (buildingData in DataFromParsers.getBuildings()) {
             val building = Building(context, buildingData)
             mapDrawSystem.addBuildingDrawSystem(building.getBuildingDraw())
+            buildings.add(building)
         }
     }
 
@@ -39,6 +40,16 @@ class MapWidget @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        val xTouch = (event.x - mapGestureSystem.getFullX()) / mapGestureSystem.getScaleFactor()
+        val yTouch = (event.y - mapGestureSystem.getFullY()) / mapGestureSystem.getScaleFactor()
+
+        for (building in buildings) {
+            if (building.getBuildingRect().contains(xTouch, yTouch)) {
+                building.onTouchEvent(event, xTouch, yTouch)
+                break
+            }
+        }
+
         return getMapGestureSystem().onTouchEvent(event)
     }
 

@@ -41,19 +41,23 @@ class MapGestureSystem(private val mapWidget: MapWidget) {
         return scaleMatrix
     }
 
-//    fun getFullX() : Float {
-//        return x;
-//    }
-//    fun setFullX(x: Float) {
-//        this.x = x;
-//    }
-//
-//    fun getFullY() : Float {
-//        return y;
-//    }
-//    fun setFullY(y: Float) {
-//        this.y = y;
-//    }
+    fun getScaleFactor() : Float {
+        return scaleFactor
+    }
+
+    fun getFullX() : Float {
+        return x;
+    }
+    fun setFullX(x: Float) {
+        this.x = x;
+    }
+
+    fun getFullY() : Float {
+        return y;
+    }
+    fun setFullY(y: Float) {
+        this.y = y;
+    }
 //
 //    fun getTransformationX() : Float {
 //        return xT;

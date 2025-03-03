@@ -1,6 +1,8 @@
 package com.polyton.ui.widgets.map.objects
 
 import android.content.Context
+import android.graphics.RectF
+import android.view.MotionEvent
 import com.polyton.data.map.BuildingData
 import com.polyton.ui.widgets.map.draw.BuildingDrawSystem
 
@@ -11,6 +13,7 @@ class Building(private val context: Context,
     private lateinit var currentFloor : Floor
 
     private var isActivate = false
+    private val buildingRect = RectF(Float.MAX_VALUE, Float.MAX_VALUE, 0f, 0f)
     private val buildingDrawSystem = BuildingDrawSystem(this)
 
     init {
@@ -25,10 +28,23 @@ class Building(private val context: Context,
         return currentFloor
     }
 
+    fun getBuildingRect() : RectF {
+        return buildingRect
+    }
+
+    fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
+        currentFloor.onTouchEvent(event, x, y)
+    }
+
     private fun initFloors() {
         for (floorData in buildingData.floors) {
             val floor = Floor(context, buildingData, floorData)
             floors.add(floor)
+
+            buildingRect.left = buildingRect.left.coerceAtMost(floor.getFloorRect().left)
+            buildingRect.top = buildingRect.top.coerceAtMost(floor.getFloorRect().top)
+            buildingRect.right = buildingRect.right.coerceAtLeast(floor.getFloorRect().right)
+            buildingRect.bottom = buildingRect.bottom.coerceAtLeast(floor.getFloorRect().bottom)
         }
         currentFloor = floors[0]
     }

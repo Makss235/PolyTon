@@ -2,6 +2,7 @@ package com.polyton.ui.widgets.map.draw
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.RectF
 import android.view.MotionEvent
 import com.caverock.androidsvg.SVG
@@ -37,15 +38,15 @@ class FloorDrawSystem(private val context: Context, private val floor : Floor) :
                     ((svg.documentViewBox.right - svg.documentViewBox.left) / buildingData.width))
     }
 
-    fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
-
+    fun getFloorRect() : RectF {
+        return floorRect
     }
 
     override fun draw(canvas: Canvas) {
         svg.renderToCanvas(canvas, floorRect)
 
-        for (p in floor.getPoints()) {
-            p.getPointDrawSystem().draw(canvas)
+        for (point in floor.getPoints()) {
+            point.getPointDrawSystem().draw(canvas)
         }
     }
 }

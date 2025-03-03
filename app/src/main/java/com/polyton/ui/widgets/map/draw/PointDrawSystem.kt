@@ -10,7 +10,7 @@ import com.polyton.ui.widgets.map.objects.Point
 
 class PointDrawSystem(private val context: Context, private val point : Point) : DrawSystem() {
 
-    private val backPaint : Paint = Paint()
+    val backPaint : Paint = Paint()
     private val textPaint : Paint = Paint()
 
     init {
