@@ -19,6 +19,7 @@ class MapWidget @JvmOverloads constructor(
     private val mapGestureSystem = MapGestureSystem(this)
 
     private val buildings = ArrayList<Building>()
+    private var currentBuilding : Building
 
     init {
         holder.addCallback(this)
@@ -29,6 +30,7 @@ class MapWidget @JvmOverloads constructor(
             mapDrawSystem.addBuildingDrawSystem(building.getBuildingDraw())
             buildings.add(building)
         }
+        currentBuilding = buildings[0]
     }
 
     fun getMapDrawSystem() : MapDrawSystem {
@@ -37,6 +39,10 @@ class MapWidget @JvmOverloads constructor(
 
     fun getMapGestureSystem() : MapGestureSystem {
         return mapGestureSystem
+    }
+
+    fun getCurrentBuilding() : Building {
+        return currentBuilding
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

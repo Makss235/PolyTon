@@ -20,16 +20,24 @@ class Building(private val context: Context,
         initFloors()
     }
 
-    fun getBuildingDraw() : BuildingDrawSystem {
-        return buildingDrawSystem
+    fun getFloors() : ArrayList<Floor> {
+        return floors
     }
 
     fun getCurrentFloor() : Floor {
         return currentFloor
     }
 
+    fun setCurrentFloor(currentFloor: Floor) {
+        this.currentFloor = currentFloor
+    }
+
     fun getBuildingRect() : RectF {
         return buildingRect
+    }
+
+    fun getBuildingDraw() : BuildingDrawSystem {
+        return buildingDrawSystem
     }
 
     fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {

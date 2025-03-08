@@ -14,6 +14,8 @@ class PointDrawSystem(private val context: Context, private val point : Point) :
     private val textPaint : Paint = Paint()
 
     init {
+        point.stateChanged += { pointStateChanged(it) }
+
         backPaint.style = Paint.Style.FILL
         backPaint.color = Color.GREEN
 
@@ -21,6 +23,14 @@ class PointDrawSystem(private val context: Context, private val point : Point) :
         textPaint.textSize = 25f
         textPaint.textAlign = Paint.Align.CENTER
         textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+    }
+
+    private fun pointStateChanged(state: Point.PointState) {
+        backPaint.color = when(state) {
+            Point.PointState.ACTIVE -> Color.RED
+            Point.PointState.SELECTED -> Color.YELLOW
+            Point.PointState.NORMAL -> Color.GREEN
+        }
     }
 
     override fun draw(canvas: Canvas) {

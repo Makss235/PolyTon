@@ -4,11 +4,11 @@ import com.polyton.data.parsers.Graph
 import com.polyton.data.parsers.Vertex
 
 internal class DijkstraAlgorithm(private val graph: Graph) {
-    private val distances = mutableMapOf<Vertex, Double>().apply {
-        graph.vertices.forEach { this[it] = Double.MAX_VALUE }
-    }
 
     fun runAlgorithm(source: Vertex, end: Vertex): List<Vertex> {
+        val distances = mutableMapOf<Vertex, Double>().apply {
+            graph.vertices.forEach { this[it] = Double.MAX_VALUE }
+        }
         val previous = mutableMapOf<Vertex, Vertex>()
         val notVisited = graph.vertices.toMutableSet()
 
@@ -40,9 +40,5 @@ internal class DijkstraAlgorithm(private val graph: Graph) {
         path.reverse()
 
         return path
-    }
-
-    fun runAlgorithm(source: String, end: String): List<Vertex> {
-        return runAlgorithm(graph.vertices.find { it.id == source }!!, graph.vertices.find { it.id == end }!!)
     }
 }

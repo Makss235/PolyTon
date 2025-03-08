@@ -3,12 +3,14 @@ package com.polyton.ui.widgets.map.objects
 import android.content.Context
 import android.graphics.RectF
 import android.view.MotionEvent
+import com.polyton.data.DijkstraAlgorithm
 import com.polyton.data.map.BuildingData
 import com.polyton.data.map.FloorData
 import com.polyton.data.parsers.Graph
+import com.polyton.data.parsers.Vertex
 import com.polyton.data.parsers.XMLFloorParser
-import com.polyton.ui.map.draw.PointEventArgs
 import com.polyton.ui.widgets.map.draw.FloorDrawSystem
+import kotlinx.event.event
 
 class Floor(private val context: Context,
             private val buildingData: BuildingData,
@@ -22,7 +24,11 @@ class Floor(private val context: Context,
     private var yRatio : Double = (buildingData.height)/(3251.43 + 5*17.04)
 
     private var graph : Graph = XMLFloorParser(context, pathToGraphSvgFile).graph
+    private var algorithm = DijkstraAlgorithm(graph)
     private var points : MutableList<Point> = mutableListOf()
+    private var pointsAlgo : MutableList<Vertex> = mutableListOf()
+
+    val pathBuilt = event<MutableList<Vertex>>()
 
     private val floorDrawSystem: FloorDrawSystem = FloorDrawSystem(context, this)
 
@@ -32,7 +38,7 @@ class Floor(private val context: Context,
             vertex.x = vertex.x * xRatio + buildingData.x
             vertex.y = vertex.y * yRatio + buildingData.y + 13 * yRatio
             if (vertex.id != "") {
-                val p = Point(context, vertex)
+                val p = Point(context, buildingData, floorData, vertex, this)
                 points.add(p)
             }
         }
@@ -62,13 +68,18 @@ class Floor(private val context: Context,
         return floorDrawSystem.getFloorRect()
     }
 
+    fun buildPath(start : Point, end : Point) {
+        pointsAlgo.addAll(algorithm.runAlgorithm(
+            start.getVertex(), end.getVertex()))
+
+        pathBuilt(pointsAlgo)
+    }
+
     fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {
-        if (event.action == MotionEvent.ACTION_UP) {
-            for (point in points) {
-                if (point.getPointRect().contains(x, y)) {
-                    point.onTouchEvent(event, x, y)
-                    break
-                }
+        for (point in points) {
+            if (point.getPointRect().contains(x, y)) {
+                point.onTouchEvent(event, x, y)
+                break
             }
         }
     }

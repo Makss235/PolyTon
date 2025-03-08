@@ -7,9 +7,8 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.polyton.ui.map.draw.BuildingDraw
-import com.polyton.ui.map.draw.MapPoint
-import com.polyton.ui.map.draw.PointEventArgs
+import com.polyton.ui.widgets.map.objects.Building
+import com.polyton.ui.widgets.map.objects.Point
 
 class MapView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null) :
@@ -18,8 +17,8 @@ class MapView @JvmOverloads constructor(
     private val buttonLayerLinearLayout : LinearLayout
     private val mapWidget : MapWidget
 
-    private lateinit var firstPoint : MapPoint
-    private lateinit var secondPoint : MapPoint
+    private var firstPoint : Point? = null
+    private var secondPoint : Point? = null
 
     init {
         val mapDrawLayoutParams = ConstraintLayout.LayoutParams(
@@ -43,9 +42,9 @@ class MapView @JvmOverloads constructor(
         buttonLayerLinearLayout.layoutParams = buttonLayerLayoutParams
 
         mapWidget = MapWidget(context)
-//        mapWidget.pointClicked += { pointClicked(it) }
+        MapEventManager.pointClicked += { pointClicked(it) }
         mapWidget.layoutParams = mapDrawLayoutParams
-//        buttonLayersReinit(mapWidget.currentBuilding)
+        buttonLayersReinit(mapWidget.getCurrentBuilding())
 
         val constraintLayout = ConstraintLayout(context)
         constraintLayout.addView(mapWidget)
@@ -54,38 +53,52 @@ class MapView @JvmOverloads constructor(
         addView(constraintLayout)
     }
 
-    private fun buttonLayersReinit(buildingDraw: BuildingDraw) {
+    private fun buttonLayersReinit(building: Building) {
         buttonLayerLinearLayout.removeAllViews()
 
-        for (number in 1..buildingDraw.floorDraws.size) {
-            val b = Button(context)
-            b.setLayoutParams(LinearLayout.LayoutParams(150, 150))
-            b.text = number.toString()
-            b.setOnClickListener {
-                buildingDraw.currentFloor = buildingDraw.floorDraws[number - 1]
+        for (number in 1..building.getFloors().size) {
+            val button = Button(context)
+            button.layoutParams = LinearLayout.LayoutParams(150, 150)
+            button.text = number.toString()
+            button.setOnClickListener {
+                building.setCurrentFloor(building.getFloors()[number - 1])
                 mapWidget.invalidate()
             }
 
-            buttonLayerLinearLayout.addView(b)
+            buttonLayerLinearLayout.addView(button)
         }
     }
 
     private fun pointClicked(args: PointEventArgs) {
         val dialog = BottomSheetDialog(context)
 
-        val b1: Button = Button(context)
+        val b1 = Button(context)
         b1.text = "1"
         b1.setOnClickListener {
             firstPoint = args.point
             args.point.answer(true)
+
+            if (firstPoint != null && secondPoint != null) {
+                firstPoint!!.owner.buildPath(firstPoint!!, secondPoint!!)
+            }
+
             dialog.dismiss()
         }
-        val b2: Button = Button(context)
+        val b2 = Button(context)
         b2.text = "2"
         b2.setOnClickListener {
             secondPoint = args.point
             args.point.answer(true)
+
+            if (firstPoint != null && secondPoint != null) {
+                firstPoint!!.owner.buildPath(firstPoint!!, secondPoint!!)
+            }
+
             dialog.dismiss()
+        }
+
+        dialog.setOnCancelListener {
+            args.point.answer(false)
         }
 
         val l = LinearLayout(context)
