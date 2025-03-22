@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.RectF
 import android.view.MotionEvent
 import com.polyton.data.DijkstraAlgorithm
+import com.polyton.data.PathFinder
 import com.polyton.data.map.BuildingData
 import com.polyton.data.map.FloorData
 import com.polyton.data.parsers.Graph
@@ -13,6 +14,7 @@ import com.polyton.ui.widgets.map.draw.FloorDrawSystem
 import kotlinx.event.event
 
 class Floor(private val context: Context,
+            private val owner: Building,
             private val buildingData: BuildingData,
             private val floorData: FloorData) {
 
@@ -25,6 +27,7 @@ class Floor(private val context: Context,
 
     private var graph : Graph = XMLFloorParser(context, pathToGraphSvgFile).graph
     private var algorithm = DijkstraAlgorithm(graph)
+//    private var algorithm2 = PathFinder(graph)
     private var points : MutableList<Point> = mutableListOf()
     private var pointsAlgo : MutableList<Vertex> = mutableListOf()
 
@@ -38,10 +41,14 @@ class Floor(private val context: Context,
             vertex.x = vertex.x * xRatio + buildingData.x
             vertex.y = vertex.y * yRatio + buildingData.y + 13 * yRatio
             if (vertex.id != "") {
-                val p = Point(context, buildingData, floorData, vertex, this)
+                val p = Point(context, this, buildingData, floorData, vertex)
                 points.add(p)
             }
         }
+    }
+
+    fun getOwner() : Building {
+        return owner
     }
 
     fun getBuildingData() : BuildingData {
@@ -69,10 +76,17 @@ class Floor(private val context: Context,
     }
 
     fun buildPath(start : Point, end : Point) {
+        pointsAlgo.clear()
         pointsAlgo.addAll(algorithm.runAlgorithm(
             start.getVertex(), end.getVertex()))
+//        pointsAlgo.addAll(algorithm2.findShortestPath(
+//            start.getVertex(), end.getVertex())!!)
 
         pathBuilt(pointsAlgo)
+    }
+
+    fun buildPathFromLadderToPoint(point: Point) {
+        
     }
 
     fun onTouchEvent(event: MotionEvent, x : Float, y: Float) {

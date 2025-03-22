@@ -1,7 +1,6 @@
 package com.polyton.ui.widgets.map.objects
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.RectF
 import android.view.MotionEvent
 import com.polyton.data.map.BuildingData
@@ -13,13 +12,17 @@ import com.polyton.ui.widgets.map.draw.PointDrawSystem
 import kotlinx.event.event
 
 class Point(private val context : Context,
+            private val owner : Floor,
             private val buildingData : BuildingData,
             private val floorData : FloorData,
-            private val vertex : Vertex,
-            val owner : Floor) {
+            private val vertex : Vertex) {
 
     enum class PointState {
         ACTIVE, SELECTED, NORMAL
+    }
+
+    enum class PointType {
+        AUDITORIUM, LADDER
     }
 
     val stateChanged = event<PointState>()
@@ -29,11 +32,15 @@ class Point(private val context : Context,
         vertex.x.toFloat() + 32, vertex.y.toFloat() + 18)
     private var title : String = ""
     private var isClickOnPoint = false
-    var state : PointState = PointState.NORMAL
+    var pointState : PointState = PointState.NORMAL
         set(value) {
             field = value
-            stateChanged(state)
+            stateChanged(pointState)
         }
+        get() {
+            return field
+        }
+    lateinit var pointType : PointType
 
     private val pointDrawSystem = PointDrawSystem(context, this)
 
@@ -43,10 +50,20 @@ class Point(private val context : Context,
             if (vId[0] == '_' && vId[vId.length - 1] == '_') {
                 vId = vId.substring(1 until vId.length)
                 val parts = vId.split('_')
-                if (parts[0] == "A" && parts.size > 1)
+                if (parts[0] == "A" && parts.size > 1) {
                     title = parts[1]
+                    pointType = PointType.AUDITORIUM
+                }
+                else if (parts[0] == "LADDER" && parts.size > 1) {
+                    title = parts[1]
+                    pointType = PointType.LADDER
+                }
             }
         }
+    }
+
+    fun getOwner() : Floor {
+        return owner
     }
 
     fun getVertex() : Vertex {
@@ -72,21 +89,21 @@ class Point(private val context : Context,
             isClickOnPoint = false
         if (event.action == MotionEvent.ACTION_UP && isClickOnPoint) {
 
-            state = when(state) {
+            pointState = when(pointState) {
                 PointState.ACTIVE -> PointState.SELECTED
                 PointState.SELECTED -> PointState.NORMAL
                 PointState.NORMAL -> PointState.SELECTED
             }
 
             MapEventManager.pointClicked(PointEventArgs(
-                state, this, buildingData, floorData))
+                pointState, this, buildingData, floorData))
 
             isClickOnPoint = false
         }
     }
 
     fun answer(boolean: Boolean) {
-        state = if (boolean)
+        pointState = if (boolean)
             PointState.ACTIVE
         else PointState.NORMAL
     }

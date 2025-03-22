@@ -1,56 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3268.47 1845.51">
-  <g id="_пути" data-name="пути">
-    <line x1="1649.08" y1="411.38" x2="1649.08" y2="710.72" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="1003.09" x2="1649.08" y2="1188.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1784.45" y1="710.72" x2="1784.45" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="710.72" x2="1784.45" y2="710.72" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="1003.09" x2="1784.45" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1784.45" y1="1003.09" x2="1889.61" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1889.61" y1="1003.09" x2="1958.75" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2138.86" y1="1003.09" x2="2204.22" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2204.22" y1="1003.09" x2="2265.59" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2265.59" y1="1003.09" x2="2326.96" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2326.96" y1="1003.09" x2="2380.85" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2380.85" y1="1003.09" x2="2462.23" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="1003.09" x2="2543.61" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1958.75" y1="1003.09" x2="2138.86" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2380.85" y1="1051.88" x2="2462.23" y2="1051.88" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="1051.88" x2="2543.61" y2="1051.88" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1513.72" y1="710.72" x2="1513.72" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="710.72" x2="1513.72" y2="710.72" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="1003.09" x2="1513.72" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_RH_" cx="1649.08" cy="411.38" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_WH_" cx="1649.08" cy="1188.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1649.08" y1="1003.09" x2="1649.08" y2="849.74" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_CL_" cx="1649.08" cy="849.74" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1889.61" y1="1003.09" x2="1889.61" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_251_" cx="1889.61" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="1958.75" y1="1003.09" x2="1958.75" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_252_" cx="1958.75" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2138.86" y1="1003.09" x2="2138.86" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_253_" cx="2138.86" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2204.22" y1="1003.09" x2="2204.22" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_254_" cx="2204.22" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2265.59" y1="1003.09" x2="2265.59" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_255_" cx="2265.59" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2326.96" y1="1003.09" x2="2326.96" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2380.85" y1="1003.09" x2="2380.85" y2="1051.88" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2380.85" y1="776.33" x2="2380.85" y2="1003.08" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2543.61" y1="776.33" x2="2543.61" y2="1003.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2543.61" y1="1003.09" x2="2543.61" y2="1051.88" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_256_" cx="2326.96" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="1051.88" x2="2462.23" y2="1100.68" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_257_" cx="2462.23" cy="1100.68" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2380.85" y1="776.33" x2="2462.23" y2="776.33" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="776.33" x2="2543.61" y2="776.33" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="776.33" x2="2462.23" y2="683.25" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_A_259_" cx="2462.23" cy="683.25" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <line x1="2462.23" y1="1003.09" x2="2462.23" y2="882.09" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-    <circle id="_RL_" cx="2462.23" cy="882.09" r="4.5" fill="none" stroke="#e30613" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
-  </g>
-  <g id="_точка" data-name="точка">
-    <circle id="__Point__" cx="17.04" cy="17.04" r="17.04" fill="none"/>
-    <circle id="__Point__-2" data-name="__Point__" cx="3251.43" cy="1828.47" r="17.04" fill="none"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="_Слой_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 3268.5 1845.5" style="enable-background:new 0 0 3268.5 1845.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#E30613;stroke-linecap:square;stroke-miterlimit:10;}
+	.st1{fill:none;}
+</style>
+<g id="_пути">
+	<line class="st0" x1="1649.1" y1="411.4" x2="1649.1" y2="710.7"/>
+	<line class="st0" x1="1649.1" y1="1003.1" x2="1649.1" y2="1188.7"/>
+	<line class="st0" x1="1784.4" y1="710.7" x2="1784.4" y2="1003.1"/>
+	<line class="st0" x1="1649.1" y1="710.7" x2="1784.4" y2="710.7"/>
+	<line class="st0" x1="1649.1" y1="1003.1" x2="1784.4" y2="1003.1"/>
+	<line class="st0" x1="1784.4" y1="1003.1" x2="1889.6" y2="1003.1"/>
+	<line class="st0" x1="1889.6" y1="1003.1" x2="1958.8" y2="1003.1"/>
+	<line class="st0" x1="2138.9" y1="1003.1" x2="2204.2" y2="1003.1"/>
+	<line class="st0" x1="2204.2" y1="1003.1" x2="2265.6" y2="1003.1"/>
+	<line class="st0" x1="2265.6" y1="1003.1" x2="2327" y2="1003.1"/>
+	<line class="st0" x1="2327" y1="1003.1" x2="2380.9" y2="1003.1"/>
+	<line class="st0" x1="2380.9" y1="1003.1" x2="2462.2" y2="1003.1"/>
+	<line class="st0" x1="2462.2" y1="1003.1" x2="2543.6" y2="1003.1"/>
+	<line class="st0" x1="1958.8" y1="1003.1" x2="2138.9" y2="1003.1"/>
+	<line class="st0" x1="2380.9" y1="1051.9" x2="2462.2" y2="1051.9"/>
+	<line class="st0" x1="2462.2" y1="1051.9" x2="2543.6" y2="1051.9"/>
+	<line class="st0" x1="1513.7" y1="710.7" x2="1513.7" y2="1003.1"/>
+	<line class="st0" x1="1649.1" y1="710.7" x2="1513.7" y2="710.7"/>
+	<line class="st0" x1="1649.1" y1="1003.1" x2="1513.7" y2="1003.1"/>
+	<circle id="_RH_" class="st0" cx="1649.1" cy="411.4" r="4.5"/>
+	<circle id="_WH_" class="st0" cx="1649.1" cy="1188.7" r="4.5"/>
+	<line class="st0" x1="1649.1" y1="1003.1" x2="1649.1" y2="849.7"/>
+	<circle id="_LADDER_C_" class="st0" cx="1649.1" cy="849.7" r="4.5"/>
+	<line class="st0" x1="1889.6" y1="1003.1" x2="1889.6" y2="1100.7"/>
+	<circle id="_A_251_" class="st0" cx="1889.6" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="1958.8" y1="1003.1" x2="1958.8" y2="1100.7"/>
+	<circle id="_A_252_" class="st0" cx="1958.8" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2138.9" y1="1003.1" x2="2138.9" y2="1100.7"/>
+	<circle id="_A_253_" class="st0" cx="2138.9" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2204.2" y1="1003.1" x2="2204.2" y2="1100.7"/>
+	<circle id="_A_254_" class="st0" cx="2204.2" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2265.6" y1="1003.1" x2="2265.6" y2="1100.7"/>
+	<circle id="_A_255_" class="st0" cx="2265.6" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2327" y1="1003.1" x2="2327" y2="1100.7"/>
+	<line class="st0" x1="2380.9" y1="1003.1" x2="2380.9" y2="1051.9"/>
+	<line class="st0" x1="2380.9" y1="776.3" x2="2380.9" y2="1003.1"/>
+	<line class="st0" x1="2543.6" y1="776.3" x2="2543.6" y2="1003.1"/>
+	<line class="st0" x1="2543.6" y1="1003.1" x2="2543.6" y2="1051.9"/>
+	<circle id="_A_256_" class="st0" cx="2327" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2462.2" y1="1051.9" x2="2462.2" y2="1100.7"/>
+	<circle id="_A_257_" class="st0" cx="2462.2" cy="1100.7" r="4.5"/>
+	<line class="st0" x1="2380.9" y1="776.3" x2="2462.2" y2="776.3"/>
+	<line class="st0" x1="2462.2" y1="776.3" x2="2543.6" y2="776.3"/>
+	<line class="st0" x1="2462.2" y1="776.3" x2="2462.2" y2="683.2"/>
+	<circle id="_A_259_" class="st0" cx="2462.2" cy="683.2" r="4.5"/>
+	<line class="st0" x1="2462.2" y1="1003.1" x2="2462.2" y2="882.1"/>
+	<circle id="_LADDER_R_" class="st0" cx="2462.2" cy="882.1" r="4.5"/>
+</g>
+<g id="_точка">
+	<circle id="__Point__" class="st1" cx="17" cy="17" r="17"/>
+	<circle id="__Point__-2" class="st1" cx="3251.4" cy="1828.5" r="17"/>
+</g>
 </svg>

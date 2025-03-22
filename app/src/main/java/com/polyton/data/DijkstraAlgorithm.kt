@@ -42,3 +42,46 @@ internal class DijkstraAlgorithm(private val graph: Graph) {
         return path
     }
 }
+
+class PathFinder(private val graph: Graph) {
+
+    fun findAllPaths(source: Vertex, destination: Vertex): List<List<Vertex>> {
+        val allPaths = mutableListOf<List<Vertex>>()
+        val currentPath = mutableListOf<Vertex>()
+        dfs(source, destination, currentPath, allPaths)
+        return allPaths
+    }
+
+    private fun dfs(current: Vertex, destination: Vertex, currentPath: MutableList<Vertex>, allPaths: MutableList<List<Vertex>>) {
+        currentPath.add(current)
+
+        if (current == destination) {
+            allPaths.add(ArrayList(currentPath))
+        } else {
+            for (edge in current.edges) {
+                val nextVertex = if (edge.from == current) edge.to else edge.from
+                if (!currentPath.contains(nextVertex)) {
+                    dfs(nextVertex, destination, currentPath, allPaths)
+                }
+            }
+        }
+
+        currentPath.removeAt(currentPath.size - 1)
+    }
+
+    fun findShortestPath(source: Vertex, destination: Vertex): List<Vertex>? {
+        val allPaths = findAllPaths(source, destination)
+
+        return allPaths.minByOrNull { path -> calculatePathWeight(path) }
+    }
+
+    private fun calculatePathWeight(path: List<Vertex>): Double {
+        var totalWeight = 0.0
+        for (i in 0 until path.size - 1) {
+            val from = path[i]
+            val to = path[i + 1]
+            totalWeight += from.edges.find { it.to == to || it.from == to }?.weight ?: Double.MAX_VALUE
+        }
+        return totalWeight
+    }
+}

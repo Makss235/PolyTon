@@ -79,7 +79,7 @@ class MapView @JvmOverloads constructor(
             args.point.answer(true)
 
             if (firstPoint != null && secondPoint != null) {
-                firstPoint!!.owner.buildPath(firstPoint!!, secondPoint!!)
+                firstPoint!!.getOwner().buildPath(firstPoint!!, secondPoint!!)
             }
 
             dialog.dismiss()
@@ -91,7 +91,7 @@ class MapView @JvmOverloads constructor(
             args.point.answer(true)
 
             if (firstPoint != null && secondPoint != null) {
-                firstPoint!!.owner.buildPath(firstPoint!!, secondPoint!!)
+                firstPoint!!.getOwner().buildPath(firstPoint!!, secondPoint!!)
             }
 
             dialog.dismiss()

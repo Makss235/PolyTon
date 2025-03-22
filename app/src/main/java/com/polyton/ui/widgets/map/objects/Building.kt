@@ -44,9 +44,13 @@ class Building(private val context: Context,
         currentFloor.onTouchEvent(event, x, y)
     }
 
+    fun buildPath(firstPoint: Point, secondPoint: Point) {
+
+    }
+
     private fun initFloors() {
         for (floorData in buildingData.floors) {
-            val floor = Floor(context, buildingData, floorData)
+            val floor = Floor(context, this, buildingData, floorData)
             floors.add(floor)
 
             buildingRect.left = buildingRect.left.coerceAtMost(floor.getFloorRect().left)
